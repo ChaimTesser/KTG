@@ -10,7 +10,7 @@ namespace KTG.Controllers
 {
 	public class SetupController : Controller
 	{
-		KTGDb db = new KTGDb();
+		Db db = new Db();
 		// GET: Setup
 		public ActionResult Index()
 		{
@@ -22,7 +22,7 @@ namespace KTG.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Index(SetupViewModel model)
 		{
-			KTGDb db = new KTGDb();
+			Db db = new Db();
 			model.Cities = db.Cities.Where(c => c.State == model.State).OrderBy(c=>c.CityName).ToList();
 			return RedirectToAction("CitySetup", new { model = model });
 		}
@@ -31,7 +31,7 @@ namespace KTG.Controllers
 		{
 			if (model.State != null)
 			{
-				KTGDb db = new KTGDb();
+				Db db = new Db();
 				var CheckForCities = db.Cities.Where(c => c.State == model.State).ToList();
 				if (CheckForCities.Count() == 0)
 				{
@@ -51,7 +51,7 @@ namespace KTG.Controllers
 		[HttpPost]
 		public ActionResult AddCity(SetupViewModel model)
 		{
-			KTGDb db = new KTGDb();
+			Db db = new Db();
 			Cities newCity = new Cities()
 			{
 				CityName = model.CityName,
@@ -63,18 +63,10 @@ namespace KTG.Controllers
 
 		}
 
-		public ActionResult AddShul(int id)
-		{
-			ShulSetupViewModel shul = new ShulSetupViewModel();
-			shul.CityCode = db.Cities.Find(id).CityID;
-			return View(shul);
-		}
+		
 
-		public ActionResult AddHotel(int id)
-		{
-			HotelSetupViewModel model = new HotelSetupViewModel();
-			model.CityCode = id;
-			return View(model);
-		}
+		
+
+		
 	}
 }

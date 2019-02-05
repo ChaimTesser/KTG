@@ -47,10 +47,12 @@
 			if ($("#Cities").val() != "") {
 				var id = $("#Cities option:selected").val();
 				var header = '<h3>' + $("#Cities option:selected").text() + '</h3>';
-				var buttons = '<a href="/Setup/AddShul/?id='+ id +'" class="btn btn-default">Add Shul</a>' +
-					'<a href="/Setup/AddHotel/?id=' + id +'" class="btn btn-default">Add Hotel</a>' +
+				var buttons = '<a href="/Shul/AddShul/?id='+ id +'" class="btn btn-default">Add Shul</a>' +
 					'<a href="/Setup/AddFoodEst/?id=' + id + '" class="btn btn-default">Add Hotel</a>' +
-					'<a href="/Setup/AddActivities/?id=' + id + '" class="btn btn-default">Add Activities</a>';
+					'<a href="/Setup/AddActivities/?id=' + id + '" class="btn btn-default">Add Activities</a>' +
+					'<br/>'  +
+					'<a href="/Shul/AllShuls/?id=' + id + '" class="btn btn-default">Shuls</a>' +
+					'<a href="/Hotel/AllHotels/?id=' + id + '" class="btn btn-default">Hotels</a>';
 				$("#CityNameDiv").append(header);
 				$("#CityButtons").append(buttons);
 			}

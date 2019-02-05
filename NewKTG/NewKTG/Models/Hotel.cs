@@ -21,6 +21,6 @@ namespace KTG.Models
 		public string Email { get; set; }
 		public string Website { get; set; }
 		public decimal Stars { get; set; }
-		public virtual Cities CityCode { get; set; }
+		public virtual Cities CityID { get; set; }
 	}
 }

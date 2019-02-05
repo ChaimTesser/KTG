@@ -20,7 +20,9 @@ namespace KTG.Models
 		[EmailAddress]
 		public string Email { get; set; }
 		public string Website { get; set; }
+		public string Rabbi { get; set; }
 		public string Nusach { get; set; }
-		public virtual Cities CityCode { get; set; }
+		public virtual Cities CityID { get; set; }
+		public virtual ICollection<Zman> Zmanim { get; set; } = new HashSet<Zman>();
 	}
 }
