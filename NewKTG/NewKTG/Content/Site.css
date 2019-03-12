@@ -1,6 +1,7 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,43 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+html {
+	font-family: pp-sans-big-light, Helvetica Neue, Arial, sans-serif;
+}
+th {
+	background-color:black;
+	color:white;
+	text-transform:uppercase;
+	text-align:center;
+}
+.hRow{
+	text-align:center;
+	
+}
+.hRow a {
+	text-decoration: none;
+	color:black;
+}
+.hRow tr:hover {
+	
+	cursor: pointer;
+	background-color: #f5f5f5;
+}
+
+body {
+	font-family: 'Arial Narrow', Arial, sans-serif;
+	font-weight: 400;
+	line-height: 1.25;
+}
+
+.SideBarDiv {
+	background-color: cornflowerblue;
+	color: white;
+	
+}
+.SideBarDivTop :hover {
+	background-color : lightskyblue;
+	cursor: pointer;
 }

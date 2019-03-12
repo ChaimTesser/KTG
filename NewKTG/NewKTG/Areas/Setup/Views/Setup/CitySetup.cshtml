@@ -1,0 +1,74 @@
+﻿@model KTG.Areas.Setup.ViewModels.SetupViewModel
+@{
+	ViewBag.Title = "City Setup";
+}
+
+<h2>@Model.State</h2>
+<div class="form-horizontal">
+	@Html.ActionLink("Manage Hechsher", "Index", "Hechsher")
+	@if (Model.Cities != null)
+	{
+		<div class="form-group">
+			@Html.LabelFor(m => Model.Cities, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.Cities, Model.GetCitiesSelector(), "Select City", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Cities, "", new { @class = "text-danger" })
+			</div>
+		</div>
+	}
+
+	@using (Html.BeginForm("AddCity", "Setup"))
+	{
+		<h3>Add City</h3>
+		@Html.HiddenFor(m => Model.State)
+		<div class="form-group">
+			@Html.LabelFor(m => Model.CityName, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.TextBoxFor(model => model.CityName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+				<button style="display: inline-block" type="submit" value="Go">Add</button>
+			</div>
+		</div>
+
+	}
+</div>
+<div  id="AddDivs" class="form-horizontal"
+	<div id="UpdateCity" class="form-group">
+		<div id="CityNameDiv"></div>
+		<div id="CityButtons"></div>
+	</div>
+</div>
+@section scripts{
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryval")
+	<script>
+		$(document).ready(function () {
+			var id = $("#Cities option:selected").val();
+			if (id != "")
+				LoadAll(id);
+		});
+		$("#Cities").change(function () {
+			$("#CityNameDiv").empty();
+			$("#CityButtons").empty();
+			if ($("#Cities").val() != "") {
+				var id = $("#Cities option:selected").val();
+				LoadAll(id);
+			}
+		});
+		function LoadAll(id) {
+			var header = '<h3>' + $("#Cities option:selected").text() + '</h3>';
+			var buttons = '<a href="/Setup/Shul/AddShul/?id=' + id + '" class="btn btn-default">Add Shul</a>' +
+				'<a href="/Setup/Hotel/AddHotel/?id=' + id + '" class="btn btn-default">Add Hotel</a>' +
+				'<a href="/Setup/FoodEstablishment/AddNew/?id=' + id + '" class="btn btn-default">Add Food Est</a>' +
+				'<a href="/Setup/Activity/AddActivity/?id=' + id + '" class="btn btn-default">Add Activities</a>' +
+				'<br/>' +
+				'<a href="/Setup/Shul/AllShuls/?id=' + id + '" class="btn btn-default">Shuls</a>' +
+				'<a href="/Setup/Hotel/AllHotels/?id=' + id + '" class="btn btn-default">Hotels</a>' +
+				'<a href="/Setup/FoodEstablishment/Index/?id=' + id + '" class="btn btn-default">All Food</a>' +
+				'<a href="/Setup/Activity/Index/?id=' + id + '" class="btn btn-default">Activities</a>';
+			$("#CityNameDiv").append(header);
+			$("#CityButtons").append(buttons);
+		}
+	</script>
+
+}

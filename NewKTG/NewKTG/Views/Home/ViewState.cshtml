@@ -1,0 +1,45 @@
+﻿@model KTG.ViewModels.StateViewModel
+
+@{
+    ViewBag.Title = Model.StateName + " < Kosher Travel Guy";
+}
+
+<h1 style="text-align: center">@Model.StateName</h1>
+<h2 style="text-align: center">@Model.Cities.Count Destinations</h2>
+
+
+<table width="500" align="center" id="StateTable">
+	<tr>
+		<col width="200">
+		<col width="100">
+		<col width="100">
+		<col width="100">
+		<th>City</th>
+		<th>Shuls</th>
+		<th>Food</th>
+		<th>Activities</th>
+	</tr>
+	<tbody class="hRow">
+@foreach (var item in Model.Cities.OrderBy(i => i.CityName))
+{
+		<tr>
+			<td>
+				<h3><a href="~/City/VIewCityDetails/@item.CityID">@Html.DisplayFor(modelItem => item.CityName)</a></h3>
+			</td>
+			<td><h3>@item.Shuls.Count</h3> </td>
+			<td><h3> @item.FoodEstablishments.Count </h3></td>
+			<td><h3> @item.Activities.Count </h3></td>
+		</tr>
+}
+		</tbody>
+</table>
+
+@section scripts{
+	<script>
+		$('tr').click( function() {
+    window.location = $(this).find('a').attr('href');
+}).hover( function() {
+    $(this).toggleClass('hover');
+});
+	</script>
+	}

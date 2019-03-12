@@ -1,0 +1,75 @@
+﻿@model KTG.Areas.Setup.ViewModels.ZmanimViewModel
+
+@{
+	ViewBag.Title = "Add Zman";
+}
+
+<h2>Add Zman</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>Zman</h4>
+		<hr />
+		@Html.HiddenFor(m => m.ShulID)
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control time" } })
+				@Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.OtherTime, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.OtherTime, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.OtherTime, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Days, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.Days, Model.DaySelector(), new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Days, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Prayer, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.Prayer, Model.PrayerSelector(), new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Prayer, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" type="text/css" />
+	<script src="https://code.jquery.com/jquery-2.2.2.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.1/jquery.timepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.1/jquery.timepicker.min.css" type="text/css" />
+	<script>
+
+		$(document).ready(function () {
+			$(".time").timepicker();
+		});
+	</script>
+
+
+}

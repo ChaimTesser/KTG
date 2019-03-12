@@ -1,0 +1,105 @@
+﻿@model KTG.Areas.Setup.Models.Cities
+
+@{
+	ViewBag.Title = Model.CityName + "< Kosher Travel Guy";
+}
+
+<h2 style="text-align:center">@Model.CityName, @Model.State</h2>
+
+<div style="width:100%" class="">
+		<div style="width:33%; display:inline-block; vertical-align: top" class="SideBarDiv">
+			<div style="top:0">
+				<div class="SideBarDivTop">
+					<h3 style="text-align:center">@Model.Shuls.Count Shuls</h3></div>
+				</div>
+			<div >
+				<div class="SideBarDivTop"><h3 id="foodDiv" style="text-align:center">@Model.FoodEstablishments.Count Food</h3></div>
+				<div id="showFood" style="display:none; overflow:scroll; height:300px;">
+					@foreach (var f in Model.FoodEstablishments)
+					{
+					<div style="border; padding: 3px; width:100%; display:inline-block" >
+							<div style="display:inline-block; width: 49%; vertical-align: top">
+								<strong>@f.Name</strong> <br />
+								<span>@f.Address</span> <br />
+								<span>@f.City, @f.State, @f.Zip</span> <br />
+								<span>@f.Phone</span> <br />
+								<span>@f.Email</span> <br />
+							</div>
+							<div style="display:inline-block; text-align:right; width: 49%">
+								<text style="text-align:right">@f.Type</text> <br />
+								<text style="text-align:right">@f.Hechsher.Name</text> <br />
+								<a href="@f.Website" target="_blank" style="text-align:right">Website</a> <br />
+								
+							</div>
+							<div>
+								<p>@f.Description</p> 
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+			<div >
+				<div class="SideBarDivTop">
+					<h3 id="actDiv" style="text-align:center">@Model.Activities.Count Activities</h3>
+					</div>
+					<div id="showAct" style="display:none; overflow:scroll; height:300px;">
+						@foreach (var a in Model.Activities)
+						{
+							<div style="border:inset; padding:3px; width:100%; display:inline-block">
+								<div style="display:inline-block; width: 49%; vertical-align: top">
+									<strong>@a.Name</strong> <br />
+									<span>@a.Address</span> <br />
+									<span>@a.City, @a.State, @a.Zip</span> <br />
+									<span>@a.Phone</span> <br />
+									<span>@a.Email</span> <br />
+								</div>
+								<div style="display:inline-block; width: 49%; text-align:right">
+									<a href="@a.Website" target="_blank">Website</a> <br />
+
+								</div>
+								<div style="width:100%">
+									<p>@a.Description</p>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+		</div>
+		<div id="mapid" style="width:66%; height: 500px; display:inline-block"></div>
+</div>
+
+@section scripts{
+	<script>
+		var mymap = L.map('mapid').setView([@Model.latit, @Model.longi], 13);
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+			id: 'mapbox.streets',
+			accessToken: 'pk.eyJ1IjoiaGF5b21vZmJoIiwiYSI6ImNqc3dyajVpYjA4MXA0NHBhenM3YnZ0ZXIifQ.d3Bgb453RkiLw2rRmPzQEw'
+		}).addTo(mymap);
+		L.marker([@Model.latit, @Model.longi]).addTo(mymap)
+			.bindPopup("@Model.CityName, @Model.State").openPopup();
+		var foodClick = false;
+		$("#foodDiv").click(function () {
+			if (foodClick == false) {
+				$("#showFood").show();
+				foodClick = true;
+			}
+			else {
+				$("#showFood").hide();
+				foodClick = false;
+			}
+		});
+		var actClick = false;
+		$("#actDiv").click(function () {
+			if (actClick == false) {
+				$("#showAct").show();
+				actClick = true;
+			}
+			else {
+				$("#showAct").hide();
+				actClick = false;
+			}
+		});
+	</script>
+}
