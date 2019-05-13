@@ -17,9 +17,7 @@ namespace KTG.Areas.Setup.Models
 		public virtual ICollection<Activity> Activities { get; set; } = new HashSet<Activity>();
 		public virtual ICollection<Hotel> Hotels { get; set; } = new HashSet<Hotel>();
 		public virtual ICollection<FoodEstablishment> FoodEstablishments { get; set; } = new HashSet<FoodEstablishment>();
-		[NotMapped]
-		public string longi { get; set; }
-		[NotMapped]
-		public string latit { get; set; }
+		public virtual Coordinates Coordinates { get; set; }
+
 	}
 }

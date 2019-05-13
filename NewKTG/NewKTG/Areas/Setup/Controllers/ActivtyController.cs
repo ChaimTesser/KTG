@@ -1,4 +1,5 @@
-﻿using KTG.Areas.Setup.Models;
+﻿using Geocoding;
+using KTG.Areas.Setup.Models;
 using KTG.Models;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,10 @@ namespace KTG.Areas.Setup.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult AddActivity(Activity a)
+		public async System.Threading.Tasks.Task<ActionResult> AddActivity(Activity a)
 		{
-			a.IDCity = db.Cities.Find(a.IDCity.CityID);
+		  	a.IDCity = db.Cities.Find(a.IDCity.CityID);
+			a.Coordinates = await new Coordinates().GetCoordinates(a.Address, a.City, a.State, a.Zip);
 			db.Activities.Add(a);
 			db.SaveChanges();
 			return RedirectToAction("Index", new { id = a.IDCity.CityID });

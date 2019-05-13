@@ -35,5 +35,6 @@ namespace KTG.Areas.Setup.Models
 		}
 
 		public IGeocoder IGeo { get; set; }
+
 	}
 }

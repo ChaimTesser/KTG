@@ -6,21 +6,9 @@ using System.Web;
 
 namespace KTG.Areas.Setup.Models
 {
-	public class Activity
+	public class Activity : Location
 	{
 		public int id { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string State { get; set; }
-		public string Zip { get; set; }
-		public string Country { get; set; }
-		[Phone]
-		public string Phone { get; set; }
-		[EmailAddress]
-		public string Email { get; set; }
-		public string Website { get; set; }
 		public string Description { get; set; }
-		public virtual Cities IDCity { get; set; }
 	}
 }

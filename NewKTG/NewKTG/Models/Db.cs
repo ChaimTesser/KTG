@@ -16,6 +16,7 @@ namespace KTG.Models
 		public DbSet<Zman> Zmanim { get; set; }
 		public DbSet<Hechsher> Hechshers { get; set; }
 		public DbSet<FoodEstablishment> FoodEstablishments { get; set; }
+		public DbSet<Coordinates> Coordinates { get; set; }
 
 	}
 

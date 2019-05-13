@@ -45,22 +45,26 @@
 					<div id="showAct" style="display:none; overflow:scroll; height:300px;">
 						@foreach (var a in Model.Activities)
 						{
-							<div style="border:inset; padding:3px; width:100%; display:inline-block">
-								<div style="display:inline-block; width: 49%; vertical-align: top">
-									<strong>@a.Name</strong> <br />
+						<div style="border:inset; padding:3px; width:100%; display:inline-block">
+							@*<div style="display:inline-block; width: 49%; vertical-align: top">*@
+							<div class="card">
+								<div class="card-header">@a.Name</div>
+								<div class="card-body">
 									<span>@a.Address</span> <br />
 									<span>@a.City, @a.State, @a.Zip</span> <br />
 									<span>@a.Phone</span> <br />
 									<span>@a.Email</span> <br />
-								</div>
-								<div style="display:inline-block; width: 49%; text-align:right">
-									<a href="@a.Website" target="_blank">Website</a> <br />
 
-								</div>
-								<div style="width:100%">
-									<p>@a.Description</p>
+									<div style="display:inline-block; width: 49%; text-align:right">
+										<a href="@a.Website" target="_blank">Website</a> <br />
+
+									</div>
+									<div style="width:100%">
+										<p>@a.Description</p>
+									</div>
 								</div>
 							</div>
+						</div>
 						}
 					</div>
 				</div>
@@ -70,14 +74,14 @@
 
 @section scripts{
 	<script>
-		var mymap = L.map('mapid').setView([@Model.latit, @Model.longi], 13);
+		var mymap = L.map('mapid').setView([@Model.Coordinates.Latitude, @Model.Coordinates.Longitude], 13);
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 			maxZoom: 18,
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiaGF5b21vZmJoIiwiYSI6ImNqc3dyajVpYjA4MXA0NHBhenM3YnZ0ZXIifQ.d3Bgb453RkiLw2rRmPzQEw'
 		}).addTo(mymap);
-		L.marker([@Model.latit, @Model.longi]).addTo(mymap)
+		L.marker([@Model.Coordinates.Latitude, @Model.Coordinates.Longitude]).addTo(mymap)
 			.bindPopup("@Model.CityName, @Model.State").openPopup();
 		var foodClick = false;
 		$("#foodDiv").click(function () {

@@ -244,6 +244,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Setup\Models\Coordinates.cs" />
     <Compile Include="Areas\Setup\Models\Geocoder.cs" />
+    <Compile Include="Areas\Setup\Models\Location.cs" />
     <Compile Include="Areas\Setup\SetupAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Setup\Controllers\ActivtyController.cs" />

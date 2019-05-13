@@ -24,8 +24,10 @@ namespace KTG.Controllers
 			Cities city = db.Cities.Find(id);
 			IGeocoder geocoder = Geocoder.Instance.IGeo;
 			IEnumerable<Address> addresses = await geocoder.GeocodeAsync(city.CityName + ", " + city.State);
-			city.longi = addresses.First().Coordinates.Longitude.ToString();
-			city.latit = addresses.First().Coordinates.Latitude.ToString();
+			if (city.Coordinates == null)
+				city.Coordinates = new Coordinates();
+			city.Coordinates.Longitude = addresses.FirstOrDefault().Coordinates.Longitude;
+			city.Coordinates.Latitude = addresses.FirstOrDefault().Coordinates.Latitude;
 			return View(city);
 		}
     }
